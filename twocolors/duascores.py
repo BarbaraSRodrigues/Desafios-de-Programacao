@@ -1,34 +1,46 @@
 import networkx as nx
+from collections import deque
 
-graph = nx.graph()
-bicolored = True
+def is_bicolorable(graph):
+    # Dictionary to store colors of nodes
+    color = {}
 
-def checkColor()
+    # We will use BFS for traversal
+    queue = deque()
+
+    # Start coloring from the first node
+    for node in graph:
+        if node not in color:
+            color[node] = 0
+            queue.append(node)
+
+            while queue:
+                current_node = queue.popleft()
+
+                # Color neighbors with opposite color
+                for neighbor in graph[current_node]:
+                    if neighbor not in color:
+                        color[neighbor] = 1 - color[current_node]
+                        queue.append(neighbor)
+                    elif color[neighbor] == color[current_node]:
+                        return False
+
+    return True
 
 while True:
-
-    # Different nodes and number of edges
     n = int(input())
-    l = int(input())
 
     if n == 0:
         break
 
-    # Create the graph
-    for i in range(n):
-        graph.add_nodes(i)
+    l = int(input())
+    graph = nx.Graph()
 
-
-    for i in range(l):
-        edge1 = int(input())
-        edge2 = int(input())
-        
+    for _ in range(l):
+        edge1, edge2 = map(int, input().split())
         graph.add_edge(edge1, edge2)
-    
 
-
-
-    # Reset graph for the next input
-    graph.clear()
-
-    
+    if is_bicolorable(graph):
+        print("BICOLORABLE.")
+    else:
+        print("NOT BICOLORABLE.")
