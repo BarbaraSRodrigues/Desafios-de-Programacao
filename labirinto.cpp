@@ -1,22 +1,22 @@
 #include <iostream>
-#include <string>
-#include <sstream>
+#include <vector>
 using namespace std;
 
-int main(){
+const int MAX_SIZE = 225; 
 
+int main() {
     int w, h, numMaze = 0;
-    char aux;
-
-    while(true){
+    
+    while (true) {
         cin >> w >> h;
-        int maze[w*3][h*3];
-
-        if((w == 0) && (h == 0))
+        
+        if ((w == 0) && (h == 0))
             break;
         
-        for(int i = 0; i < h; i++){
-            for(int j = 0; j < w; j++){
+        vector<vector<int>> maze(MAX_SIZE, vector<int>(MAX_SIZE, 0));
+        
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
                 char aux;
                 cin >> aux;
 
@@ -49,8 +49,8 @@ int main(){
         }
 
         // Displaying the maze for testing
-        for(int i = 0; i < w*3; i++){
-            for(int j = 0; j < h*3; j++){
+        for (int i = 0; i < w * 3; i++) {
+            for (int j = 0; j < h * 3; j++) {
                 cout << maze[i][j] << " ";
             }
             cout << endl;
