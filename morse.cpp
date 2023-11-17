@@ -36,10 +36,10 @@ void decode(char lettersAndDiggits[], string morse[], string phrase){
 
     // cout << decoded.length() << " " << reversed.length() << endl;
 
-    if(decoded == reversed){
-        cout << "1" << endl;
-    } else {
+    if(decoded != reversed || decoded.empty()){
         cout << "0" << endl;
+    } else {
+        cout << "1" << endl;
     }
 }
 
@@ -52,7 +52,7 @@ int main(){
     */
 
     string word, line, phrase;
-
+    
     // Morse code library
     char lettersAndDiggits[36] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
                         ,'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
@@ -65,7 +65,8 @@ int main(){
                        ,"01111", "00111", "00011", "00001", "00000"
                        ,"10000", "11000", "11100", "11110"};
 
-    getline(cin, line);
+ 
+    getline(cin, line); 
     if(line.empty()){
         cout << "0" << endl;
         return 0;
@@ -74,5 +75,8 @@ int main(){
     while(ss >> word){
         phrase += word;
     }
+
+    // cout << phrase;
+    
     decode(lettersAndDiggits, morse, phrase);
 }
